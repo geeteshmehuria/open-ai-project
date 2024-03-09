@@ -1,12 +1,14 @@
 const express = require("express");
 const { connection } = require("./config/db");
 const { UserRouter } = require("./routers/userRoutes");
+const { JokesRouter } = require("./routers/jokesRouter");
 require("dotenv").config();
 
 const app = express();
 
 app.use(express.json());
 app.use("/users", UserRouter);
+app.use("/jokes", JokesRouter);
 
 // app.get("/", (req, res) => {
 //   res.send("hello world");
