@@ -12,10 +12,12 @@ const getJoke = async (items) => {
       model: "gpt-3.5-turbo",
     });
     const joke = chatCompletion.choices[0].message.content;
+    console.log(joke);
     return joke;
   } catch (error) {
     console.error("Error fetching joke:", error);
-    throw error;
+    // throw error;
+    console.log(error);
   }
 };
 

@@ -1,3 +1,8 @@
+const { blacklistTokenModel } = require("../model/blackListModule");
+
+const jwt = require("jsonwebtoken");
+const { UserModel } = require("../model/userModel");
+
 const auth = async (req, res, next) => {
   const token = req.headers.authorization?.split(" ")[1];
   if (await blacklistTokenModel.findOne({ token })) {
@@ -7,10 +12,10 @@ const auth = async (req, res, next) => {
     try {
       const decoded = jwt.verify(token, "openai");
       const { userID } = decoded;
+      console.log(userID);
       const user = await UserModel.findById({ _id: userID });
       if (user) {
         req.body.userID = decoded.userID;
-        req.body.authors = decoded.authors;
         next();
       } else {
         res.status(400).send({ msg: "Please register first" });

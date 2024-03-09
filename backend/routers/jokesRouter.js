@@ -5,6 +5,7 @@ const {
   createJokes,
   getJokes,
   deleteJokes,
+  generate,
 } = require("../controllers/jokesController");
 
 const JokesRouter = express.Router();
@@ -12,5 +13,6 @@ const JokesRouter = express.Router();
 JokesRouter.post("/", auth, createJokes);
 JokesRouter.get("/", auth, getJokes);
 JokesRouter.delete("/", auth, deleteJokes);
+JokesRouter.get("/:items", auth, generate);
 
 module.exports = { JokesRouter };

@@ -1,9 +1,21 @@
 const { JokesModel } = require("../model/jokesModel");
+const { getJoke } = require("../utils/jokesUtil");
 // const { NoteModule } = require("../model/noteModule");
+
+const generate = async (req, res) => {
+  try {
+    let { items } = req.params;
+    let result = await getJoke(items);
+
+    res.status(200).json({ result });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const createJokes = async (req, res) => {
   try {
-   const joke = new JokesModel(req.body);
+    const joke = new JokesModel(req.body);
     await joke.save();
     res.send({ msg: "joke added successfully " });
   } catch (error) {
@@ -38,4 +50,5 @@ module.exports = {
   createJokes,
   getJokes,
   deleteJokes,
+  generate,
 };

@@ -1,6 +1,7 @@
 const { blacklistTokenModel } = require("../model/blackListModule");
 const { UserModel } = require("../model/userModel");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const register = (req, res) => {
   const { name, email, password } = req.body;
@@ -29,6 +30,7 @@ const login = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await UserModel.findOne({ email });
+
     if (user) {
       bcrypt.compare(password, user.password, (err, result) => {
         if (result) {
