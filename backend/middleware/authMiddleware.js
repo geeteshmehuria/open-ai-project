@@ -10,6 +10,7 @@ const auth = async (req, res, next) => {
       const user = await UserModel.findById({ _id: userID });
       if (user) {
         req.body.userID = decoded.userID;
+        req.body.authors = decoded.authors;
         next();
       } else {
         res.status(400).send({ msg: "Please register first" });
