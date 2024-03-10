@@ -52,6 +52,20 @@ const login = async (req, res) => {
   }
 };
 
+// const logout = async (req, res) => {
+//   const token = req.headers.authorization?.split(" ")[1];
+//   try {
+//     const blacklistToken = await blacklistTokenModel.findOne({ token });
+//     if (blacklistToken) {
+//       res.status(400).send({ msg: "Already logged out" });
+//     } else {
+//       const blacklist = new blacklistTokenModel({ token });
+//       await blacklist.save();
+//     }
+//   } catch (error) {
+//     res.status(500).send({ error: "err" });
+//   }
+// };
 const logout = async (req, res) => {
   const token = req.headers.authorization?.split(" ")[1];
   try {
@@ -61,9 +75,12 @@ const logout = async (req, res) => {
     } else {
       const blacklist = new blacklistTokenModel({ token });
       await blacklist.save();
+      res.status(200).send({ msg: "Logout successful" }); // Added response for success
     }
   } catch (error) {
-    res.status(500).send({ error: "err" });
+    console.error(error); // Log the error for debugging
+    res.status(500).send({ error: "Internal server error" });
   }
 };
+
 module.exports = { register, login, logout };

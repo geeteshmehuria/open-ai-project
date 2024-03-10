@@ -2,10 +2,12 @@ const express = require("express");
 const { connection } = require("./config/db");
 const { UserRouter } = require("./routers/userRoutes");
 const { JokesRouter } = require("./routers/jokesRouter");
+var cors = require("cors");
 require("dotenv").config();
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use("/users", UserRouter);
 app.use("/jokes", JokesRouter);

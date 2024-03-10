@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Flex,
   Box,
@@ -15,15 +15,15 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { authLinLout, setName } from "../redux/authSlice";
-import { url } from "../assets/Extra";
+// import { url } from "../assets/Extra";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth.auth);
+  //   const auth = useSelector((state) => state.auth.auth);
   const [email, setEmail] = useState("");
-  const [pass, setPassword] = useState("");
+  const [password, setPassword] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const navigate = useNavigate();
@@ -32,9 +32,9 @@ const Login = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post(`${url}/users/login`, {
+      const response = await axios.post(`http://localhost:8080/users/login`, {
         email,
-        pass,
+        password,
       });
 
       if (response.status === 200) {
@@ -67,10 +67,13 @@ const Login = () => {
   return (
     <Flex
       color="black"
-      height="100vh"
+      minH="89.7vh"
       alignItems="center"
       justifyContent="center"
-      marginTop="-70px"
+      // marginTop="-70px"
+      backgroundImage={
+        "radial-gradient(circle at center center, rgba(33,33,33,0),rgb(33,33,33)),repeating-linear-gradient(135deg, rgb(33,33,33) 0px, rgb(33,33,33) 1px,transparent 1px, transparent 4px),repeating-linear-gradient(45deg, rgb(56,56,56) 0px, rgb(56,56,56) 5px,transparent 5px, transparent 6px),linear-gradient(90deg, rgb(33,33,33),rgb(33,33,33))"
+      }
     >
       <Box
         p={8}
@@ -78,6 +81,8 @@ const Login = () => {
         borderWidth={1}
         borderRadius={8}
         boxShadow="lg"
+        className="glass"
+        color={"white"}
       >
         <Box textAlign="center" mb={4}>
           <h1 style={{ fontSize: "40px", fontWeight: "700" }}>Login</h1>
@@ -97,12 +102,12 @@ const Login = () => {
             <Input
               type="password"
               placeholder="Enter your password"
-              value={pass}
+              value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </FormControl>
 
-          <Button width="full" type="submit">
+          <Button width="full" type="submit" colorScheme="teal">
             Log In
           </Button>
         </form>

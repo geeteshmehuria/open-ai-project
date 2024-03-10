@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { url } from "../assets/Extra";
+// import { url } from "../assets/Extra";
 
 const Signup = () => {
   const [name, setUsername] = useState("");
@@ -42,7 +42,7 @@ const Signup = () => {
 
     // http://localhost:8080/users/register
     try {
-      console.log(`${url}/users/register`);
+      console.log(`http://localhost:8080/users/register`);
       const response = await axios.post(
         "http://localhost:8080/users/register",
         {
@@ -75,7 +75,10 @@ const Signup = () => {
       direction="column"
       alignItems="center"
       justifyContent="center"
-      minH="100vh"
+      minH="89.7vh"
+      backgroundImage={
+        "radial-gradient(circle at center center, rgba(33,33,33,0),rgb(33,33,33)),repeating-linear-gradient(135deg, rgb(33,33,33) 0px, rgb(33,33,33) 1px,transparent 1px, transparent 4px),repeating-linear-gradient(45deg, rgb(56,56,56) 0px, rgb(56,56,56) 5px,transparent 5px, transparent 6px),linear-gradient(90deg, rgb(33,33,33),rgb(33,33,33))"
+      }
     >
       <Box
         p={8}
@@ -84,6 +87,8 @@ const Signup = () => {
         borderRadius={8}
         boxShadow="lg"
         mt={-10}
+        className="glass"
+        color={"white"}
       >
         <form onSubmit={handleSubmit}>
           <Box textAlign="center" mb={4}>
@@ -119,7 +124,7 @@ const Signup = () => {
             />
           </FormControl>
 
-          <Button type="submit" width="full">
+          <Button type="submit" width="full" colorScheme="teal">
             Sign Up
           </Button>
         </form>
